@@ -1,0 +1,29 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "Devo",
+  "id": "devo-datasource",
+  "metrics": true,
+  "annotations": true,
+  "backend": false,
+  "info": {
+    "description": "Devo datasource",
+    "author": {
+      "name": "Devo, Inc.",
+      "url": "https://www.devo.com/"
+    },
+    "keywords": ["datasource", "devo"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=10.4.0",
+    "plugins": []
+  }
+}
