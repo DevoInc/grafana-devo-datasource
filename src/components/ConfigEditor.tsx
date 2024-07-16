@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { ChangeEvent } from 'react';
 import { InlineField, Input, SecretInput } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';

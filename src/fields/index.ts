@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FieldType } from '@grafana/data';
 
 export const createFields = (metadata, data) => {

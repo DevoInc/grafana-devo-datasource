@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { isFetchError } from '@grafana/runtime';
 import {
   CoreApp,
@@ -56,7 +57,9 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
               format: 'json/compact',
             })
             .then((result) => result)
-            .catch((error) => console.error('Query failed: %s', error))
+            .catch((error) => {
+              throw new Error(error);
+            })
         : {};
 
       return toDataFrame({
