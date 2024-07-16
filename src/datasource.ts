@@ -95,7 +95,6 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
 
     try {
       const response = await this.request('/search');
-      debugger;
       if (response.status === 200) {
         return {
           status: 'success',
