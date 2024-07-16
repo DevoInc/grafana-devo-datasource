@@ -11,14 +11,19 @@ export function QueryEditor({ query, onChange, onRunQuery }: Props) {
 
   const onQueryTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange({ ...query, queryText: event.target.value });
+  };
+
+  const onChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
     onRunQuery();
   };
+
   return (
     <Stack gap={0}>
       <InlineField label="Query Text" labelWidth={16} tooltip="Not used yet">
         <Input
           id="query-editor-query-text"
           onChange={onQueryTextChange}
+          onBlur={onChangeQuery}
           value={queryText || ''}
           required
           placeholder="Enter a query"
