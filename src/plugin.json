@@ -17,8 +17,17 @@
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
+    "screenshots": [
+      {
+        "name": "Dashboard",
+        "path": "img/dashboard.png"
+      },
+      {
+        "name": "Config",
+        "path": "img/config.png"
+      }
+    ],
     "links": [],
-    "screenshots": [],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
