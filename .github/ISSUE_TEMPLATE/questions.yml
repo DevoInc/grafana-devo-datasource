@@ -1,0 +1,9 @@
+name: Add question
+description: Ask a question to learn about genesys-ui.
+labels: [question]
+body:
+  - type: textarea
+    attributes:
+      label: How can we help you?
+    validations:
+      required: true

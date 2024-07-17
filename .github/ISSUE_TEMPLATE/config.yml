@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: You have solved your question, visit issues questions
+    url: https://github.com/DevoInc/devo-datasource/labels/question
+    about: List of open questions in the project.
