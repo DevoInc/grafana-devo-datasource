@@ -1,7 +1,7 @@
 services:
   grafana:
     user: root
-    container_name: 'devoinc-grafana-datasource'
+    container_name: 'devoinc-datasource'
 
     build:
       context: ./.config
@@ -12,13 +12,13 @@ services:
     ports:
       - 3000:3000/tcp
     volumes:
-      - ./dist:/var/lib/grafana/plugins/devoinc-grafana-datasource
+      - ./dist:/var/lib/grafana/plugins/devoinc-datasource
       - ./provisioning:/etc/grafana/provisioning
-      - .:/root/devoinc-grafana-datasource
+      - .:/root/devoinc-datasource
 
     environment:
       NODE_ENV: development
-      GF_LOG_FILTERS: plugin.devoinc-grafana-datasource:debug
+      GF_LOG_FILTERS: plugin.devoinc-datasource:debug
       GF_LOG_LEVEL: debug
       GF_DATAPROXY_LOGGING: 1
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: devoinc-grafana-datasource
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: devoinc-datasource
