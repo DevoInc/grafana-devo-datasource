@@ -2,7 +2,7 @@ import { createFields } from 'fields';
 import { Metadata } from './declarations';
 import { FieldType } from '@grafana/data';
 
-const execCases: [string, Metadata, unknown, { name: string; type: unknown; values: unknown[] }[]][] = [
+const execCases: [string, Metadata, unknown[][], { name: string; type: unknown; values: unknown[] }[]][] = [
   [
     'should create fields with correct types',
     [
