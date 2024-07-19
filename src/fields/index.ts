@@ -1,8 +1,9 @@
-// @ts-nocheck
 import { FieldType } from '@grafana/data';
 
-export const createFields = (metadata, data) => {
-  const mapType = {
+import { Metadata } from './declarations';
+
+export const createFields = (metadata: Metadata, data: unknown[][]) => {
+  const mapType: { [key: string]: string } = {
     timestamp: FieldType.time,
     str: FieldType.string,
     int4: FieldType.number,
@@ -12,7 +13,7 @@ export const createFields = (metadata, data) => {
     bool: FieldType.boolean,
     geocoord: FieldType.geo,
   };
-  const fields = [];
+  const fields: { name: string; type: unknown; values: unknown[] }[] = [];
 
   for (const m of metadata) {
     fields.push({ name: m.name, type: mapType[m.type] ?? FieldType.other, values: [] });
