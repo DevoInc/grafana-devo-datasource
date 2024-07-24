@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { isFetchError } from '@grafana/runtime';
 import {
-  CoreApp,
   DataQueryRequest,
   DataQueryResponse,
   DataSourceApi,
@@ -9,63 +8,47 @@ import {
   toDataFrame,
 } from '@grafana/data';
 
-const sdkClient = require('@devoinc/browser-sdk');
-
 export const defaultQuery: Partial<MyQuery> = {
   constant: 6.5,
 };
 
-import { MyQuery, MyDataSourceOptions, DEFAULT_QUERY } from './types';
+import { MyQuery, MyDataSourceOptions } from './types';
 import _, { defaults } from 'lodash';
 import { createFields } from 'fields';
+import { fetchData } from './fetchData';
 
 export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
-  baseUrl: string;
-
   constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
     super(instanceSettings);
-    this.baseUrl = instanceSettings.url!;
-    this.serreaClient = sdkClient.client({
-      url: instanceSettings.jsonData.endpoint,
-      token: `bearer ${instanceSettings.jsonData.token}`,
-    });
-  }
-
-  getDefaultQuery(_: CoreApp): Partial<MyQuery> {
-    return DEFAULT_QUERY;
-  }
-
-  filterQuery(query: MyQuery): boolean {
-    // if no query has been provided, prevent the query from being executed
-    return !!query.queryText;
+    this.endpoint = instanceSettings.jsonData.endpoint;
+    this.token = `bearer ${instanceSettings.jsonData.token}`;
   }
 
   async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
     const { range } = options;
-    const from = range!.from.valueOf();
-    const to = range!.to.valueOf();
 
     const promises = options.targets.map(async (target) => {
       const query = defaults(target, defaultQuery);
+      if (query.queryText) {
+        const result = await fetchData(
+          this.endpoint,
+          this.token,
+          range!.from.valueOf(),
+          range!.to.valueOf(),
+          query.queryText
+        );
 
-      const result = query?.queryText
-        ? await this.serreaClient
-            .query({
-              query: query.queryText + ' pragma comment.application: "grafanaPlugin_v3.0.0"',
-              dateFrom: from,
-              dateTo: to,
-              format: 'json/compact',
-            })
-            .then((result) => result)
-            .catch((error) => {
-              throw new Error(error);
-            })
-        : {};
-
-      return toDataFrame({
-        refId: query.refId,
-        fields: query?.queryText ? createFields(result.object.metadata, result.object.d) : [],
-      });
+        if (result.error) {
+          throw new Error(`Status: ${result.status}, message: ${result.error}`);
+        } else {
+          return toDataFrame({
+            refId: query.refId,
+            fields: query?.queryText ? createFields(result.object.metadata, result.object.d) : [],
+          });
+        }
+      } else {
+        return [];
+      }
     });
 
     return Promise.all(promises).then((data) => ({ data }));
@@ -73,18 +56,19 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
 
   async request(url: string, params?: string) {
     const now = new Date().getTime();
-    return this.serreaClient
-      .query({
-        query: 'from demo.ecommerce.data select eventdate,protocol,statusCode,method limit 1',
-        dateFrom: now - 1,
-        dateTo: now,
-      })
-      .then((result) => {
-        return { ...result, status: 200 };
-      })
-      .catch((error) => {
-        return { status: 1, statusText: error };
-      });
+    const result = fetchData(
+      this.endpoint,
+      this.token,
+      now - 1000,
+      now,
+      'from siem.logtrust.web.activity select eventdate limit 1'
+    );
+
+    if (result.error) {
+      return { status: 1, statusText: result.error };
+    } else {
+      return { ...result, status: 200 };
+    }
   }
 
   /**

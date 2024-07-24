@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
     "dev": "webpack -w -c ./.config/webpack/webpack.config.ts --env development",
-    "test": "jest --watch --onlyChanged",
+    "test": "jest",
     "test:ci": "jest --passWithNoTests --maxWorkers 4",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --cache --ignore-path ./.gitignore --ext .js,.jsx,.ts,.tsx .",
@@ -59,13 +59,11 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@devoinc/browser-sdk": "^3.1.5",
     "@emotion/css": "11.10.6",
     "@grafana/data": "^10.4.0",
     "@grafana/runtime": "^10.4.0",
     "@grafana/schema": "^10.4.0",
     "@grafana/ui": "^10.4.0",
-    "ipaddr.js": "^2.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tslib": "2.5.3"
