@@ -1,44 +1,24 @@
 # Devo-Datasource
-<!-- To help maximize the impact of your README and improve usability for users, we propose the following loose structure:
 
-**BEFORE YOU BEGIN**
-- Ensure all links are absolute URLs so that they will work when the README is displayed within Grafana and Grafana.com
-- Be inspired ✨
-  - [grafana-polystat-panel](https://github.com/grafana/grafana-polystat-panel)
-  - [volkovlabs-variable-panel](https://github.com/volkovlabs/volkovlabs-variable-panel)
+## Introduction
 
-**ADD SOME BADGES**
+This plugin provides a datasource to query the data hosted in Devo in the grafana app. Using [query api](https://docs.devo.com/space/latest/95128275/Query+API) you can query data according to the region you come from. 
 
-Badges convey useful information at a glance for users whether in the Catalog or viewing the source code. You can use the generator on [Shields.io](https://shields.io/badges/dynamic-json-badge) together with the Grafana.com API
-to create dynamic badges that update automatically when you publish a new version to the marketplace.
-
-- For the logo field use 'grafana'.
-- Examples (label: query)
-  - Downloads: $.downloads
-  - Catalog Version: $.version
-  - Grafana Dependency: $.grafanaDependency
-  - Signature Type: $.versionSignatureType
-
-Full example: ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?logo=grafana&query=$.version&url=https://grafana.com/api/plugins/grafana-polystat-panel&label=Marketplace&prefix=v&color=F47A20)
-
-Consider other [badges](https://shields.io/badges) as you feel appropriate for your project.
-
-## Overview / Introduction
-Provide one or more paragraphs as an introduction to your plugin to help users understand why they should use it.
-
-Consider including screenshots:
-- in [plugin.json](https://grafana.com/developers/plugin-tools/reference/plugin-json#info) include them as relative links.
-- in the README ensure they are absolute URLs.
-
-## Requirements
-List any requirements or dependencies they may need to run the plugin.
+https://docs.devo.com/space/latest/94763821/Authentication+tokens
 
 ## Getting Started
-Provide a quick start on how to configure and use the plugin.
+
+You will be able to install this plugin via zip in your grafana instance. For this we recommend you to check the [grafana documentation](https://grafana.com/docs/grafana/latest/administration/plugin-management/#install-plugin-on-local-grafana) to know how to do it.
 
 ## Documentation
-If your project has dedicated documentation available for users, provide links here. For help in following Grafana's style recommendations for technical documentation, refer to our [Writer's Toolkit](https://grafana.com/docs/writers-toolkit/).
+
+1. Add the [endpoint](https://docs.devo.com/space/latest/95128275/Query+API) where we want to consult.
+2. [Generate token](https://docs.devo.com/space/latest/94763821/Authentication+tokens)
+3. Add token in input.
+4. Click in save & test.
+
+If after these steps there has been no error you can use the datasource in the widgets.
 
 ## Contributing
-Do you want folks to contribute to the plugin or provide feedback through specific means? If so, tell them how!
--->
+
+Check out our [contribution](https://github.com/DevoInc/grafana-devo-datasource/blob/main/CONTRIBUTING.md) page to see how you can contribute to the development of this plugin.
