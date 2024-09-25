@@ -5,7 +5,8 @@
   "id": "devoinc-datasource",
   "metrics": true,
   "annotations": true,
-  "backend": false,
+  "backend": true,
+  "alerting": true,
   "info": {
     "description": "Devo datasource",
     "author": {
