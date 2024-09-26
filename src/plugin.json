@@ -7,6 +7,7 @@
   "annotations": true,
   "backend": true,
   "alerting": true,
+  "executable": "gpx_devo",
   "info": {
     "description": "Devo datasource",
     "author": {

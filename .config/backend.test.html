@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>WebSocket Test</h2>
+
+<div id="alerts"></div>
+
+<script>
+  let ws = new WebSocket("ws://localhost:8080/ws/alerts");
+
+  ws.onmessage = function(event) {
+    document.getElementById("alerts").innerHTML += `<p>${event.data}</p>`;
+  };
+
+  ws.onclose = function() {
+    console.log("Connection closed");
+  };
+</script>
+
+</body>
+</html>
